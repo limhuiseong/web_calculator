@@ -130,6 +130,48 @@
                 operator_screen.value = "";
                 RresultFld.value = comma((resultFld.value));
             }
+            // pass function
+            try {
+
+            } catch (e) {
+
+            }
+
+            try {
+
+            } catch (e) {
+
+            }
+
+            try {
+
+            } catch (e) {
+
+            }
+
+            try {
+
+            } catch (e) {
+
+            }
+
+            try {
+
+            } catch (e) {
+
+            }
+
+            try {
+
+            } catch (e) {
+
+            }
+
+            try {
+
+            } catch (e) {
+
+            }
 
             try {
 
