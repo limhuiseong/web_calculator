@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            #common_btn
+            {
+                color:black;
+                border: solid 1px;
+                height: 75px;
+                width: 100px;
+            }
+            #screen
+            {
+                color:black;
+                border: solid 1px;
+                height: 200px;
+                width: 400px;
+            }
+            #input
+            {
+                height:100%;
+                width:100%;
+                font-size:x-large;
+                background-color: gray;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>
+            2022112022-임희성[정보통신공학전공]<br>
+            2017112048-정재성[전자전기공학부]
+        </h3>
+        <p>밑으로 스크롤 하시면 계산기 전체가 보입니다.</p>
+        <table style="border: solid 1px; height: 700px; width:400px; background-color: gainsboro;">
+            <tr>
+                <td id="screen" colspan = "4" style="background-color: gainsboro;">
+                    <input type="text" value="0" id ="RresultFld" style=" text-align: right; font-size:60px; height:80%; width:80%; margin: 9%;">
+                </td>
+            </tr>
+            <tr>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="7" onclick="btn_click(7)">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="8" onclick="btn_click(8)">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="9" onclick="btn_click(9)">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="/" onclick="operator('/')">
+                </td>
+            </tr>
+            <tr>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="4" onclick="btn_click(4)">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="5" onclick="btn_click(5)">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="6" onclick="btn_click(6)">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="*" onclick="operator('*')">
+                </td>
+            </tr>
+            <tr>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="1" onclick="btn_click(1)">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="2" onclick="btn_click(2)">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="3" onclick="btn_click(3)">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="-" onclick="operator('-')">
+                </td>
+            </tr>
+            <tr>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="0" onclick="btn_click(0)">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="." onclick="btn_click('.')">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="+" onclick="operator('+')">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="%" onclick="operator_percent('%', symbol)">
+                </td>
+            </tr>
+            <tr>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="=" onclick="enter()">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="C" onclick="del_all()">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="CE" onclick="ce()">
+                </td>
+                <td id ="common_btn">
+                    <input id ="input" type="button" value="back" onclick="back()">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <a>
+                        연산자 : 
+                    </a>
+                    <input id = "operator_screen" type = "text" style="font-size : 50px; height : 75px; width : 260px">
+                </td>
+            </tr>
+        </table>
+
+        <!--변수의 역할을 하는 input요소 선언-->
+        <input type = "text" id = "resultFld" style = "opacity: 0; width:0px; height:0px;">
+
+
+
+        <script>
+
+            var num =0 ;
+            var symbol ;
+            var operator_sc;
+            var temp;
+            var operator;
+            var secNum;
+            var firstNum;
+            var operator_signal = 0;
+            var temp;
+
+            function comma(input)
+            {
+            var nToStr = input.toString();
+            var isItDot = nToStr.indexOf('.');
+            var resultOfComma = isItDot === -1 ? nToStr : nToStr.slice(0, isItDot);
+
+            for (var i = resultOfComma.length - 3; i > 0; i -= 3)
+            {
+                resultOfComma = resultOfComma.slice(0, i) + ',' + resultOfComma.slice(i);
+            }
+
+            if (isItDot !== -1)
+            {
+                resultOfComma += nToStr.slice(isItDot);    
+            }
+
+            return resultOfComma;
+            }
+    
+            function btn_click(a)
+            {
+                if(resultFld.value === '0')
+                {
+                    resultFld.value="";
+                }
+                
+                resultFld.value += a;
+
+                if(resultFld.value === '.')
+                {
+                    resultFld.value="0.";
+                }
+
+
+                RresultFld.value = comma((resultFld.value));
+            }
+
+            function operator(b)
+            {
+                operator_screen.value = b;
+                firstNum = (document.getElementById("resultFld").value);
+                num = firstNum;
+                symbol = b ;
+
+                RresultFld.value = comma((resultFld.value));
+
+                return document.getElementById("resultFld").value = "";
+            }
+
+            function operator_percent(c,d)
+            {
+                operator_screen.value = c;
+                secNum = resultFld.value;
+                
+                secNum = firstNum * secNum / 100;
+                operator_signal++;
+
+
+                RresultFld.value = comma((resultFld.value));
+            }
+
+            function ce()
+            {
+                resultFld.value = "0";
+
+                RresultFld.value = comma((resultFld.value));
+            }
+
+            function back()
+            {
+                resultFld.value = resultFld.value.slice(0, -1)
+
+
+                RresultFld.value = comma((resultFld.value));
+            }
+    
+            function enter()
+            {
+                if(operator_signal == 0)
+                {
+                    secNum = resultFld.value;
+                }
+                else
+                {
+                    operator_signal = 0;
+                }
+                var result ;
+                switch (symbol)
+                {
+
+                    case '+' : result = Number(firstNum) + Number(secNum) ; 
+                    document.getElementById("resultFld").value = result; 
+                    break;
+
+                    case '-' : result = Number(firstNum) - Number(secNum) ; 
+                    document.getElementById("resultFld").value = result;
+                    break;
+
+                    case '*' : result = Number(firstNum) * Number(secNum) ; 
+                    document.getElementById("resultFld").value = result;
+                    break;
+
+                    case '/' : result = Number(firstNum) / Number(secNum) ; 
+                    document.getElementById("resultFld").value = result;
+                    break;
+
+                }        
+
+                RresultFld.value = comma((resultFld.value));
+            }
+    
+            function del_all()
+            {
+                document.getElementById("resultFld").value = "0";
+                num = 0;
+                firstNum = 0;
+                secNum = 0;
+                symbol = "";
+                
+                operator_screen.value = "";
+                RresultFld.value = comma((resultFld.value));
+            }
+            
+        </script>
+
+
+    </body>
+</html>

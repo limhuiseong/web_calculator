@@ -1,2 +1,2 @@
-# web_calculator
-html / css / javascript로 제작한 계산기입니다.
+### html / css / javascript calculator
+2022학년도 1학기 인터넷프로그래밍 팀프로젝트입니다.
