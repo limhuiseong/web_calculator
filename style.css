@@ -1,0 +1,21 @@
+            #common_btn
+            {
+                color:black;
+                border: solid 1px;
+                height: 75px;
+                width: 100px;
+            }
+            #screen
+            {
+                color:black;
+                border: solid 1px;
+                height: 200px;
+                width: 400px;
+            }
+            #input
+            {
+                height:100%;
+                width:100%;
+                font-size:x-large;
+                background-color: gray;
+            }
